@@ -6,8 +6,8 @@ var Document = require('./document'),
     events = require('./events'),
     server = express(),
     port = process.env.PORT || 3003,
-    dbUrl = process.env.DB_URL || 'mongodb://localhost/microservices-documents',
-    busUrl = process.env.BUS_URL;
+    dbUrl = process.env.LIBRARYDB_PORT && process.env.LIBRARYDB_PORT.replace('tcp','mongodb') || 'mongodb://localhost/microservices-documents',
+    busUrl = process.env.RABBITMQ_PORT && process.env.RABBITMQ_PORT.replace('tcp', 'amqp');
 
 mongoose.connect(dbUrl);
 events.initialize(busUrl);
